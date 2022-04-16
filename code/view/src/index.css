@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.link-item {
+  @apply rounded-lg mx-2 p-2 hover:bg-gray-500;
+}
+
+.container {
+  @apply w-full mx-auto md:max-w-2xl rounded-lg;
+}
+
+.restaurant-list-item-container {
+  @apply m-4 p-4 rounded-xl shadow-lg;
+}

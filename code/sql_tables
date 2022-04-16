@@ -1,0 +1,58 @@
+CREATE TABLE user (
+    userID int AUTO_INCREMENT,
+    email varchar(40),
+    password varchar(60),
+    Primary Key(userID)
+);
+
+CREATE TABLE admin (
+    adminID int AUTO_INCREMENT,
+    email varchar(40),
+    password varchar(60),
+    Primary Key(adminID)
+);
+
+CREATE TABLE restaurant(
+    restaurantID int AUTO_INCREMENT,
+    restaurantName varchar(50),
+    restaurantDescription varchar(200),
+    rating double not null default '0.00',
+    ratingSum double not null default '0.00',
+    ratingCount int not null default '0',
+    Primary Key(restaurantID)
+);
+
+CREATE TABLE food (
+    foodID int AUTO_INCREMENT,
+    restaurantID int,
+    foodName varchar(50),
+    foodDescription varchar(200),
+    foodPrice double not null default '0.00',
+    rating double not null default '0.00',
+    ratingSum double not null default '0.00',
+    ratingCount int not null default '0',
+    Primary Key(foodID),
+    Foreign Key(restaurantID) references restaurant(restaurantID) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE restaurantReview (
+    userID int,
+    restaurantID int,
+    rating double not null default '0.0',
+    review varchar(500),
+    Primary Key(userID, restaurantID),
+    Foreign Key(userID) references user(userID) ON DELETE CASCADE ON UPDATE CASCADE,
+    Foreign Key(restaurantID) references restaurant(restaurantID) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE foodReview (
+    userID int,
+    foodID int,
+    rating double not null default '0.0',
+    review varchar(500),
+    Primary Key(userID, foodID),
+    Foreign Key(userID) references user(userID) ON DELETE CASCADE ON UPDATE CASCADE,
+    Foreign Key(foodID) references food(foodID) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+
